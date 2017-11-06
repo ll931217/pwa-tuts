@@ -4,6 +4,23 @@ var closeCreatePostModalButton = document.querySelector('#close-create-post-moda
 
 function openCreatePostModal() {
   createPostArea.style.display = 'block';
+
+  // Check if the install prompt is deferred
+  if (deferredPrompt) {
+    deferredPrompt.prompt()
+
+    deferredPrompt.userChoice.then(choiceResult => {
+      console.log(choiceResult.outcome)
+
+      if (choiceResult.outcome === 'dismissed') {
+        console.log('User Cancelled Installation')
+      } else {
+        console.log('PWA added to home screen')
+      }
+    })
+
+    deferredPrompt = null
+  }
 }
 
 function closeCreatePostModal() {
