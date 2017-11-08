@@ -1,3 +1,9 @@
+let deferredPrompt
+
+if (!window.Promise) {
+  window.Promise = Promise
+}
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
     .then(function() {
@@ -5,7 +11,7 @@ if ('serviceWorker' in navigator) {
     })
     .catch(err => {
       console.log(err)
-    });
+    })
 }
 
 window.addEventListener('beforeinstallprompt', event => {
